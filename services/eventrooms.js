@@ -13,7 +13,18 @@ const getEventRoomById = async (id) => {
 
 const createEventRoom = async (eventRoom) => {
   await loadDatabase();
-  await new EventRoom({ ...eventRoom }).save();
+  return await new EventRoom({ ...eventRoom }).save();
+};
+
+const updateEventRoom = async (id, eventRoom) => {
+  await loadDatabase();
+  const existingEventRoom = await getEventRoomById(id);
+  for (var key in eventRoom) {
+    if (eventRoom.hasOwnProperty(key)) {
+      existingEventRoom[key] = eventRoom[key];
+    }
+  }
+  return await existingEventRoom.save();
 };
 
 const deleteEventRoom = async (id) => {
@@ -21,4 +32,10 @@ const deleteEventRoom = async (id) => {
   await EventRoom.remove({ _id: id });
 };
 
-module.exports = { getEventRooms, getEventRoomById, createEventRoom, deleteEventRoom };
+module.exports = {
+  getEventRooms,
+  getEventRoomById,
+  createEventRoom,
+  updateEventRoom,
+  deleteEventRoom,
+};

@@ -1,10 +1,9 @@
-const { createEventRoom } = require("../services/eventrooms");
+const { getEventRoomById, updateEventRoom } = require("../services/eventrooms");
 
 module.exports = async function (context, req) {
   try {
-    const eventRoom = await createEventRoom(req.body);
+    const eventRoom = await updateEventRoom(req.params.id, req.body);
     context.res = {
-      status: 201, // created
       body: eventRoom,
     };
   } catch (err) {
