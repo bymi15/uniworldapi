@@ -4,7 +4,7 @@ let db = null;
 const loadDatabase = async () => {
   if (db) return;
   await mongoose.connect(
-    `mongodb://${process.env.DB_USER}.mongo.cosmos.azure.com:${process.env.DB_PORT}/?ssl=true&retrywrites=false`,
+    `mongodb://${process.env.DB_USER}.mongo.cosmos.azure.com:${process.env.DB_PORT}/${process.env.DB_NAME}?ssl=true&retrywrites=false`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
