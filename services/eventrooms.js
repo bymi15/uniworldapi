@@ -8,7 +8,7 @@ const getEventRooms = async () => {
 
 const getEventRoomById = async (id) => {
   await loadDatabase();
-  return await EventRoom.find({ _id: id });
+  return await EventRoom.findOne({ _id: id });
 };
 
 const createEventRoom = async (eventRoom) => {
