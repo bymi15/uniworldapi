@@ -12,7 +12,10 @@ const eventRoomSchema = new mongoose.Schema({
   meetingTables: [
     {
       title: String,
-      type: String,
+      type: {
+        type: String,
+        default: "RoundMeetingTable",
+      },
       logoUrl: String,
       zoomUrl: String,
       posX: Number,

@@ -3,7 +3,12 @@ const EventRoom = require("../models/eventroom");
 
 const getEventRooms = async () => {
   await loadDatabase();
-  return await EventRoom.find();
+  return await EventRoom.find({}, "title eventDate host");
+};
+
+const getEventRoomById = async (id) => {
+  await loadDatabase();
+  return await EventRoom.find({ _id: id });
 };
 
 const createEventRoom = async (eventRoom) => {
@@ -16,4 +21,4 @@ const deleteEventRoom = async (id) => {
   await EventRoom.remove({ _id: id });
 };
 
-module.exports = { getEventRooms, createEventRoom, deleteEventRoom };
+module.exports = { getEventRooms, getEventRoomById, createEventRoom, deleteEventRoom };
