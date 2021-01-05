@@ -12,6 +12,7 @@ const eventRoomSchema = new mongoose.Schema({
   meetingTables: [
     {
       title: String,
+      type: String,
       logoUrl: String,
       zoomUrl: String,
       posX: Number,
