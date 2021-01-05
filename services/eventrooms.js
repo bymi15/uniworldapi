@@ -1,18 +1,19 @@
 const { loadDatabase } = require("./database");
+const EventRoom = require("../models/eventroom");
 
 const getEventRooms = async () => {
-  const db = await loadDatabase();
-  return await db.collection("EventRooms").find().toArray();
+  await loadDatabase();
+  return await EventRoom.find();
 };
 
 const createEventRoom = async (eventRoom) => {
-  const db = await loadDatabase();
-  await db.collection("EventRooms").insertOne(eventRoom);
+  await loadDatabase();
+  await new EventRoom({ ...eventRoom }).save();
 };
 
 const deleteEventRoom = async (id) => {
-  const db = await loadDatabase();
-  await db.collection("EventRooms").deleteOne({ _id: id });
+  await loadDatabase();
+  await EventRoom.remove({ _id: id });
 };
 
 module.exports = { getEventRooms, createEventRoom, deleteEventRoom };
