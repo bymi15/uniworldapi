@@ -2,7 +2,7 @@ const { getEventRooms } = require("../services/eventrooms");
 
 module.exports = async function (context, req) {
   try {
-    const eventRooms = await getEventRooms();
+    const eventRooms = await getEventRooms(req.query.showDetails);
     context.res = {
       body: eventRooms,
     };

@@ -1,9 +1,13 @@
 const { loadDatabase } = require("./database");
 const EventRoom = require("../models/eventroom");
 
-const getEventRooms = async () => {
+const getEventRooms = async (showDetails) => {
   await loadDatabase();
-  return await EventRoom.find({}, "title eventDate host");
+  if (showDetails) {
+    return await EventRoom.find();
+  } else {
+    return await EventRoom.find({}, "title eventDate host");
+  }
 };
 
 const getEventRoomById = async (id) => {
