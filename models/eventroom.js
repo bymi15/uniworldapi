@@ -37,10 +37,6 @@ const eventRoomSchema = new mongoose.Schema({
       },
     },
   ],
-  host: {
-    type: String,
-    required: true,
-  },
   background: String,
   scene: {
     type: String,
