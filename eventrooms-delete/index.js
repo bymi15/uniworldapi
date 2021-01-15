@@ -1,4 +1,4 @@
-const { deleteEventRoom } = require("../services/eventrooms");
+const { deleteEventRoom } = require("../utils/eventrooms");
 
 module.exports = async function (context, req) {
   try {

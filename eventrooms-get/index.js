@@ -1,4 +1,4 @@
-const { getEventRooms } = require("../services/eventrooms");
+const { getEventRooms } = require("../utils/eventrooms");
 
 module.exports = async function (context, req) {
   try {
