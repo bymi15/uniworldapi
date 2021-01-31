@@ -8,21 +8,29 @@ const parseReqData = (req) => {
   return multipart.Parse(bodyBuffer, boundary);
 };
 
-const uploadBlob = async (filename, data, container) => {
+const uploadBlobs = async (parsedData, container) => {
   const blobServiceClient = BlobServiceClient.fromConnectionString(
     process.env.BLOBSTORAGE_CONNECTION_STRING
   );
   const containerClient = blobServiceClient.getContainerClient(container);
   await containerClient.createIfNotExists({ access: "container" });
-  const blobName = uuidv1() + "_" + filename;
-  const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-  try {
-    await blockBlobClient.upload(data, data.length);
-    return `${process.env.BLOBSTORAGE_BASE_URL}/${container}/${blobName}`;
-  } catch (err) {
-    console.log(err);
-    return null;
+  const uuidPrefix = uuidv1() + "_";
+
+  let url;
+  for (let i = 0; i < parsedData.length; i++) {
+    const blobName = uuidPrefix + parsedData[i].filename;
+    const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+    try {
+      await blockBlobClient.upload(parsedData[i].data, parsedData[i].data.length);
+      if (i === 0) {
+        url = `${process.env.BLOBSTORAGE_BASE_URL}/${container}/${blobName}`;
+      }
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
   }
+  return url;
 };
 
 const getBlobs = async (container) => {
@@ -62,4 +70,4 @@ const getFirstSlides = async () => {
     return null;
   }
 };
-module.exports = { parseReqData, uploadBlob, getBlobs, getFirstSlides };
+module.exports = { parseReqData, uploadBlobs, getBlobs, getFirstSlides };
