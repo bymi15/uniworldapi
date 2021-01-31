@@ -22,12 +22,12 @@ const uploadBlobs = async (parsedData, container) => {
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
     try {
       await blockBlobClient.upload(parsedData[i].data, parsedData[i].data.length);
-      if (i === 0) {
-        url = `${process.env.BLOBSTORAGE_BASE_URL}/${container}/${blobName}`;
-      }
     } catch (err) {
       console.log(err);
       return null;
+    }
+    if (i === 0) {
+      url = `${process.env.BLOBSTORAGE_BASE_URL}/${container}/${blobName}`;
     }
   }
   return url;
