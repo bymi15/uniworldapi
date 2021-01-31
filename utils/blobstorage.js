@@ -42,4 +42,25 @@ const getBlobs = async (container) => {
     return null;
   }
 };
-module.exports = { parseReqData, uploadBlob, getBlobs };
+
+const getFirstSlides = async () => {
+  const blobServiceClient = BlobServiceClient.fromConnectionString(
+    process.env.BLOBSTORAGE_CONNECTION_STRING
+  );
+  const containerClient = blobServiceClient.getContainerClient("slides");
+  try {
+    const slides = [];
+    for await (const slide of containerClient.listBlobsFlat()) {
+      const a = slide.name.lastIndexOf("_") + 1;
+      const b = slide.name.indexOf(".", a);
+      if (slide.name.substring(a, b) === "0") {
+        slides.push(`${process.env.BLOBSTORAGE_BASE_URL}/slides/${slide.name}`);
+      }
+    }
+    return slides;
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+};
+module.exports = { parseReqData, uploadBlob, getBlobs, getFirstSlides };

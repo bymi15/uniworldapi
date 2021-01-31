@@ -1,10 +1,10 @@
-const { updateEventRoom } = require("../utils/eventrooms");
+const { updateLectureRoom } = require("../utils/lecturerooms");
 
 module.exports = async function (context, req) {
   try {
-    const eventRoom = await updateEventRoom(req.params.id, req.body);
+    const lectureRoom = await updateLectureRoom(req.params.id, req.body);
     context.res = {
-      body: eventRoom,
+      body: lectureRoom,
     };
   } catch (err) {
     context.log(`Error code: ${err.code}, message: ${err.message}`);
