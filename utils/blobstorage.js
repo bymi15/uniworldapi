@@ -5,8 +5,7 @@ const multipart = require("parse-multipart");
 const parseReqData = (req) => {
   const bodyBuffer = Buffer.from(req.body);
   const boundary = multipart.getBoundary(req.headers["content-type"]);
-  const parts = multipart.Parse(bodyBuffer, boundary);
-  return parts[0];
+  return multipart.Parse(bodyBuffer, boundary);
 };
 
 const uploadBlob = async (filename, data, container) => {
