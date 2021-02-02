@@ -50,6 +50,35 @@ const getBlobs = async (container) => {
   }
 };
 
+const deleteBlob = async (fileName, container) => {
+  const blobServiceClient = BlobServiceClient.fromConnectionString(
+    process.env.BLOBSTORAGE_CONNECTION_STRING
+  );
+  const containerClient = blobServiceClient.getContainerClient(container);
+  try {
+    await containerClient.deleteBlob(fileName);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const deleteSlides = async (fileName, numSlides) => {
+  const blobServiceClient = BlobServiceClient.fromConnectionString(
+    process.env.BLOBSTORAGE_CONNECTION_STRING
+  );
+  const containerClient = blobServiceClient.getContainerClient("slides");
+  const prefix = fileName.substring(0, fileName.lastIndexOf("_") + 1);
+  const ext = fileName.substring(fileName.lastIndexOf("."));
+  try {
+    for (let i = 0; i < numSlides; i++) {
+      const slideName = prefix + i + ext;
+      await containerClient.deleteBlob(slideName);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const getFirstSlides = async () => {
   const blobServiceClient = BlobServiceClient.fromConnectionString(
     process.env.BLOBSTORAGE_CONNECTION_STRING
@@ -70,4 +99,4 @@ const getFirstSlides = async () => {
     return null;
   }
 };
-module.exports = { parseReqData, uploadBlobs, getBlobs, getFirstSlides };
+module.exports = { parseReqData, uploadBlobs, getBlobs, getFirstSlides, deleteBlob, deleteSlides };
