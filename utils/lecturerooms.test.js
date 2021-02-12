@@ -9,25 +9,11 @@ const {
 const Lectureroom = require('../models/lectureroom');
 const { loadDatabase } = require('./database');
 
-const mockLectureRoomData = {
-  title: 'mockTitle',
-  module: 'mockModule',
-  lecturer: 'mockLecturer',
-  startTime: new Date(),
-  endTime: new Date(),
-  firstSlideUrl: 'mockUrl',
-  numSlides: 1,
-};
-
-const injectedMockLectureRoomData = {
-  title: 'mockTitle2',
-  module: 'mockModule2',
-  lecturer: 'mockLecturer2',
-  startTime: new Date(),
-  endTime: new Date(),
-  firstSlideUrl: 'mockUrl2',
-  numSlides: 2,
-};
+const {
+  mockLectureRoomData,
+  mockLectureRoomUpdate,
+  injectedMockLectureRoomData,
+} = require('../testing/mockData');
 
 describe('Lectureroom', () => {
   let injectedLectureRoomId = null;
@@ -35,6 +21,7 @@ describe('Lectureroom', () => {
   // Load MongoDB Memory Database
   beforeAll(async () => {
     await loadDatabase();
+    await Lectureroom.deleteMany();
   });
 
   // Inject mock lecture room data
@@ -124,15 +111,6 @@ describe('Lectureroom', () => {
   });
 
   it('update lecture room', async () => {
-    const mockLectureRoomUpdate = {
-      title: 'newMockTitle',
-      module: 'newMockModule',
-      lecturer: 'newMockLecturer',
-      startTime: new Date(),
-      endTime: new Date(),
-      firstSlideUrl: 'newMockUrl',
-      numSlides: 3,
-    };
     const lectureRoom = await updateLectureRoom(
       injectedLectureRoomId,
       mockLectureRoomUpdate

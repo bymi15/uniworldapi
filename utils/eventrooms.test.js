@@ -8,22 +8,11 @@ const {
 } = require('./eventrooms');
 const Eventroom = require('../models/eventroom');
 const { loadDatabase } = require('./database');
-
-const mockEventRoomData = {
-  title: 'mockTitle',
-  eventDate: new Date(),
-  meetingTables: [],
-  background: 'mockBackground',
-  scene: 'mockScene',
-};
-
-const injectedMockEventRoomData = {
-  title: 'mockTitle2',
-  eventDate: new Date(),
-  meetingTables: [],
-  background: 'mockBackground2',
-  scene: 'mockScene2',
-};
+const {
+  mockEventRoomData,
+  mockEventRoomUpdate,
+  injectedMockEventRoomData,
+} = require('../testing/mockData');
 
 describe('Eventroom', () => {
   let injectedEventRoomId = null;
@@ -31,6 +20,7 @@ describe('Eventroom', () => {
   // Load MongoDB Memory Database
   beforeAll(async () => {
     await loadDatabase();
+    await Eventroom.deleteMany();
   });
 
   // Inject mock event room data
@@ -114,13 +104,6 @@ describe('Eventroom', () => {
   });
 
   it('update event room', async () => {
-    const mockEventRoomUpdate = {
-      title: 'newMockTitle',
-      eventDate: new Date(),
-      meetingTables: [],
-      background: 'newMockBackground',
-      scene: 'newMockScene',
-    };
     const eventRoom = await updateEventRoom(
       injectedEventRoomId,
       mockEventRoomUpdate
