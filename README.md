@@ -18,12 +18,12 @@
   "Values": {
     "AzureWebJobsStorage": "",
     "FUNCTIONS_WORKER_RUNTIME": "node",
-    "DB_NAME": "uniworlddb",
+    "DB_NAME": "ENTER_DB_NAME",
     "DB_PORT": 10255,
-    "DB_USER": "ENTER_DB_USER_HERE",
-    "DB_PASSWORD": "ENTER_DB_PASSWORD_HERE",
-    "BLOBSTORAGE_BASE_URL": "https://uniworldstorage.blob.core.windows.net",
-    "BLOBSTORAGE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=uniworldstorage;AccountKey=ENTER_BLOBSTORAGE_ACCOUNT_KEY_HERE;EndpointSuffix=core.windows.net"
+    "DB_USER": "ENTER_DB_USER",
+    "DB_PASSWORD": "ENTER_DB_PASSWORD",
+    "BLOBSTORAGE_BASE_URL": "https://ENTER_BLOBSTORAGE_NAME.blob.core.windows.net",
+    "BLOBSTORAGE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=ENTER_ACCOUNT_NAME;AccountKey=ENTER_BLOBSTORAGE_ACCOUNT_KEY_HERE;EndpointSuffix=core.windows.net"
   },
   "Host": {
     "CORS": "*"
@@ -44,3 +44,32 @@ Runs unit and integration tests.
 ### `npm run release`
 
 This command can be executed to bump the version of the app according to [semver](https://semver.org/) specifications.
+
+## Endpoints
+
+blobs-delete: [DELETE] http://localhost:7071/api/blobs/{container}
+
+blobs-get: [GET] http://localhost:7071/api/blobs/{container}
+
+blobs-post: [POST] http://localhost:7071/api/blobs/{container}
+
+eventrooms-delete: [DELETE] http://localhost:7071/api/eventrooms/{id}
+
+eventrooms-get: [GET] http://localhost:7071/api/eventrooms
+
+eventrooms-getbyid: [GET] http://localhost:7071/api/eventrooms/{id}
+
+eventrooms-post: [POST] http://localhost:7071/api/eventrooms
+
+eventrooms-put: [PUT] http://localhost:7071/api/eventrooms/{id}
+
+lecturerooms-delete: [DELETE] http://localhost:7071/api/lecturerooms/{id}
+
+lecturerooms-get: [GET] http://localhost:7071/api/lecturerooms
+
+lecturerooms-getbyid: [GET] http://localhost:7071/api/lecturerooms/{id}
+
+lecturerooms-post: [POST] http://localhost:7071/api/lecturerooms
+
+lecturerooms-put: [PUT] http://localhost:7071/api/lecturerooms/{id}
+
