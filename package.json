@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "start": "func start",
-    "test": "echo \"No tests yet...\""
+    "test": "echo \"No tests yet...\"",
+    "release": "standard-version"
   },
   "dependencies": {
     "@azure/storage-blob": "^12.4.0",
@@ -13,5 +14,7 @@
     "parse-multipart": "^1.0.4",
     "uuid": "^8.3.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "standard-version": "^9.1.0"
+  }
 }
