@@ -2,7 +2,7 @@
 
 ## Setup Instructions
 
-1. Clone this repository
+1. Fork or download this repository
 
 2. Install [VS Code](https://code.visualstudio.com/)
 
